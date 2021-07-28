@@ -14,9 +14,12 @@ import { MessageProducerService } from './message.producer.service';
         port: 6379
       }
     }),
-    BullModule.registerQueue({
-      name: 'message-queue'
-    })
+    BullModule.registerQueue(
+      {
+        name: 'message-queue'
+      },
+      { name: 'file-operation-queue' }
+    )
   ],
   controllers: [AppController],
   providers: [AppService, MessageProducerService, MessageConsumer]
