@@ -15,7 +15,7 @@ import { UserService } from './user.service';
       { name: User.name, schema: UserSchema },
       { name: Logger.name, schema: LoggerSchema }
     ]),
-    BullModule.registerQueue({ name: 'logger-queue' })
+    BullModule.registerQueue({ name: 'logger-queue', limiter: { max: 1000, duration: 30 } })
   ],
   controllers: [UserController],
   providers: [UserService, LoggerService, LoggerProducer, LoggerConsumer]

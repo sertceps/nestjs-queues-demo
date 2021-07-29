@@ -24,5 +24,6 @@ export class LoggerConsumer {
   async createLog(job: Job<Log>) {
     const log: Log = job.data;
     await this.loggerService.create(log);
+    console.log('success' + job.id);
   }
 }
