@@ -1,15 +1,10 @@
-import { Body, Controller, Delete, Get, Query } from '@nestjs/common';
+import { Controller, Get, Query } from '@nestjs/common';
 import { AppService } from './app.service';
-import { FileProducerService } from './file.producer.service';
 import { MessageProducerService } from './message.producer.service';
 
 @Controller()
 export class AppController {
-  constructor(
-    private readonly appService: AppService,
-    private readonly messageProducerService: MessageProducerService,
-    private readonly fileProducerService: FileProducerService
-  ) {}
+  constructor(private readonly appService: AppService, private readonly messageProducerService: MessageProducerService) {}
 
   @Get()
   getHello(): string {
@@ -20,15 +15,5 @@ export class AppController {
   async getInvokeMessage(@Query('message') message: string) {
     this.messageProducerService.sendMessage(message);
     return message;
-  }
-
-  @Delete('remove-file')
-  async removeFile(@Body('file_name') file_name: string) {
-    console.log('a');
-
-    this.fileProducerService.deleteFile(file_name);
-    console.log('b');
-
-    return 'deleted';
   }
 }
