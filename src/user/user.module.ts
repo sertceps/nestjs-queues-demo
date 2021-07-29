@@ -7,10 +7,7 @@ import { UserController } from './user.controller';
 import { UserService } from './user.service';
 
 @Module({
-  imports: [
-    MongooseModule.forFeature([{ name: User.name, schema: UserSchema }]),
-    BullModule.registerQueue({ name: 'logger-queue', limiter: { max: 1000, duration: 30 } })
-  ],
+  imports: [MongooseModule.forFeature([{ name: User.name, schema: UserSchema }]), BullModule.registerQueue({ name: 'logger-queue' })],
   controllers: [UserController],
   providers: [UserService, LoggerProducer]
 })
