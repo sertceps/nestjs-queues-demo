@@ -1,4 +1,7 @@
-import { Prop, Schema } from '@nestjs/mongoose';
+import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
+import { Document } from 'mongoose';
+
+export type LoggerDocument = Logger & Document;
 
 @Schema()
 export class Logger {
@@ -20,3 +23,5 @@ export class Logger {
   @Prop()
   response_message: string;
 }
+
+export const LoggerSchema = SchemaFactory.createForClass(Logger);

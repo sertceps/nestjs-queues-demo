@@ -7,7 +7,6 @@ import { MessageConsumer } from './message.consumer';
 import { MessageProducerService } from './message.producer.service';
 import { UserModule } from './user/user.module';
 
-// https://www.learmoreseekmore.com/2021/04/guide-on-nestjs-queues.html
 @Module({
   imports: [
     MongooseModule.forRoot('mongodb://localhost:27017/queue'),
@@ -17,9 +16,8 @@ import { UserModule } from './user/user.module';
         port: 6379
       }
     }),
-    BullModule.registerQueue({
-      name: 'message-queue'
-    }),
+    BullModule.registerQueue({ name: 'message-queue' }),
+
     UserModule
   ],
   controllers: [AppController],

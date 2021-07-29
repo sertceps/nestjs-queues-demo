@@ -1,12 +1,23 @@
+import { BullModule } from '@nestjs/bull';
 import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
+import { LoggerService } from '../logger/logger.service';
+import { LoggerConsumer } from '../logger/queues/logger.consumer';
+import { LoggerProducer } from '../logger/queues/logger.producer';
+import { Logger, LoggerSchema } from '../logger/schemas/logger.schema';
 import { User, UserSchema } from './schemas/user.schema';
 import { UserController } from './user.controller';
 import { UserService } from './user.service';
 
 @Module({
-  imports: [MongooseModule.forFeature([{ name: User.name, schema: UserSchema }])],
+  imports: [
+    MongooseModule.forFeature([
+      { name: User.name, schema: UserSchema },
+      { name: Logger.name, schema: LoggerSchema }
+    ]),
+    BullModule.registerQueue({ name: 'message-queue' }, { name: 'logger-queue' })
+  ],
   controllers: [UserController],
-  providers: [UserService]
+  providers: [UserService, LoggerService, LoggerProducer, LoggerConsumer]
 })
 export class UserModule {}
