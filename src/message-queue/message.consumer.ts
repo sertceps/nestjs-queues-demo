@@ -4,7 +4,14 @@ import { Job } from 'bull';
 @Processor('message-queue')
 export class MessageConsumer {
   @Process('message-job')
-  readOperationJob(job: Job<unknown>) {
-    console.log(job.id);
+  consume(job: Job<unknown>) {
+    console.log(job.data);
+  }
+
+  @Process()
+  testConsume(job: Job<unknown>) {
+    console.log('no name');
+
+    console.log(job.data);
   }
 }

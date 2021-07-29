@@ -3,8 +3,8 @@ import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { MessageConsumer } from './message.consumer';
-import { MessageProducerService } from './message.producer.service';
+import { MessageConsumer } from './message-queue/message.consumer';
+import { MessageProducer } from './message-queue/message.producer';
 import { UserModule } from './user/user.module';
 
 @Module({
@@ -21,6 +21,6 @@ import { UserModule } from './user/user.module';
     UserModule
   ],
   controllers: [AppController],
-  providers: [AppService, MessageProducerService, MessageConsumer]
+  providers: [AppService, MessageProducer, MessageConsumer]
 })
 export class AppModule {}
