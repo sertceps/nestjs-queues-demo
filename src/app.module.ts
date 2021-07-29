@@ -5,7 +5,6 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { MessageConsumer } from './message-queue/message.consumer';
 import { MessageProducer } from './message-queue/message.producer';
-import { UserModule } from './user/user.module';
 
 @Module({
   imports: [
@@ -16,9 +15,7 @@ import { UserModule } from './user/user.module';
         port: 6379
       }
     }),
-    BullModule.registerQueue({ name: 'message-queue' }),
-
-    UserModule
+    BullModule.registerQueue({ name: 'message-queue' })
   ],
   controllers: [AppController],
   providers: [AppService, MessageProducer, MessageConsumer]
