@@ -14,8 +14,6 @@ import { UserModule } from './user/user.module';
         port: 6379
       }
     }),
-    BullModule.registerQueue({ name: 'message-queue' }),
-
     UserModule
   ],
   controllers: [AppController],
